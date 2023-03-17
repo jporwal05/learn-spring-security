@@ -5,10 +5,12 @@ import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.atomic.AtomicLong;
 
 import com.baeldung.lss.web.model.User;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class InMemoryUserRepository implements UserRepository {
 
-    private static AtomicLong counter = new AtomicLong();
+    private static final AtomicLong counter = new AtomicLong();
 
     private final ConcurrentMap<Long, User> users = new ConcurrentHashMap<Long, User>();
 
