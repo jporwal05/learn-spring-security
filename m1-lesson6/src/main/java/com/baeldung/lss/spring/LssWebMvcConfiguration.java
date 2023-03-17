@@ -7,17 +7,21 @@ import org.springframework.core.convert.converter.Converter;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import com.baeldung.lss.persistence.UserRepository;
 import com.baeldung.lss.web.model.User;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @EnableWebMvc
 @Configuration
-public class LssWebMvcConfiguration extends WebMvcConfigurerAdapter {
-    
+public class LssWebMvcConfiguration implements WebMvcConfigurer {
+
+    private final UserRepository userRepository;
+
     @Autowired
-    private UserRepository userRepository;
+    public LssWebMvcConfiguration(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
